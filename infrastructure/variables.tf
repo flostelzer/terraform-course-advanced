@@ -71,12 +71,13 @@ variable "subnets" {
   type = list(object({
     name           = string
     address_prefix = string
+    private_endpoint_network_policies = optional(string, "Enabled")
   }))
   description = "This defines the names and address prefixes of the subnets."
 }
 
 variable "subnet_range_firewall" {
-  type = string
+  type        = string
   description = "This defines the subnet range for the firewall subnet."
 }
 

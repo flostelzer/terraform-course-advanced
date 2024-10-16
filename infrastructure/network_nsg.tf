@@ -1,5 +1,5 @@
 resource "azurerm_network_security_group" "tfschool" {
-  name                = "nsg-${local.workload_context}"
+  name                = "nsg-${local.workload_context_workspaces}"
   location            = var.location
   resource_group_name = azurerm_resource_group.tfschool.name
 

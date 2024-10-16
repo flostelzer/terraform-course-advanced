@@ -1,4 +1,6 @@
 resource "azurerm_subnet" "tfschool_firewall" {
+  count = terraform.workspace == "dev" ? 1 : 0  
+
   name                 = "AzureFirewallSubnet"
   resource_group_name  = azurerm_resource_group.tfschool.name
   virtual_network_name = azurerm_virtual_network.tfschool_count[0].name
@@ -6,6 +8,8 @@ resource "azurerm_subnet" "tfschool_firewall" {
 }
 
 resource "azurerm_public_ip" "tfschool" {
+  count = terraform.workspace == "dev" ? 1 : 0  
+
   name                = "ip-${local.workload_context}"
   location            = azurerm_resource_group.tfschool.location
   resource_group_name = azurerm_resource_group.tfschool.name
@@ -16,6 +20,8 @@ resource "azurerm_public_ip" "tfschool" {
 }
 
 resource "azurerm_firewall" "tfschool" {
+  count = terraform.workspace == "dev" ? 1 : 0  
+
   name                = "fw-${local.workload_context}"
   location            = azurerm_resource_group.tfschool.location
   resource_group_name = azurerm_resource_group.tfschool.name
@@ -24,16 +30,18 @@ resource "azurerm_firewall" "tfschool" {
 
   ip_configuration {
     name                 = "configuration"
-    subnet_id            = azurerm_subnet.tfschool_firewall.id
-    public_ip_address_id = azurerm_public_ip.tfschool.id
+    subnet_id            = azurerm_subnet.tfschool_firewall[0].id
+    public_ip_address_id = azurerm_public_ip.tfschool[0].id
   }
 
   tags = var.security_tags
 }
 
 resource "azurerm_firewall_application_rule_collection" "tfschool" {
+  count = terraform.workspace == "dev" ? 1 : 0  
+
   name                = "fwrc-${local.workload_context}"
-  azure_firewall_name = azurerm_firewall.tfschool.name
+  azure_firewall_name = azurerm_firewall.tfschool[0].name
   resource_group_name = azurerm_resource_group.tfschool.name
   priority            = 100
   action              = "Allow"

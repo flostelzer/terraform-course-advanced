@@ -1,8 +1,13 @@
+# moved {
+#   from = azurerm_log_analytics_workspace.tfschool
+#   to   = azurerm_log_analytics_workspace.terraform_course
+# }
+
 resource "azurerm_log_analytics_workspace" "tfschool" {
   provider = azurerm.second_provider
   count    = length(azurerm_resource_group.tfschool.name) != 0 ? 1 : 0
 
-  name                = "law-${local.workload_context}"
+  name                = "law-${local.workload_context_workspaces}"
   location            = azurerm_resource_group.tfschool.location
   resource_group_name = azurerm_resource_group.tfschool.name
   sku                 = "PerGB2018"
