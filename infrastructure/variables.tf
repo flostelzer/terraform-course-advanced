@@ -69,8 +69,8 @@ variable "vnet_range" {
 
 variable "subnets" {
   type = list(object({
-    name           = string
-    address_prefix = string
+    name                              = string
+    address_prefix                    = string
     private_endpoint_network_policies = optional(string, "Enabled")
   }))
   description = "This defines the names and address prefixes of the subnets."
@@ -103,6 +103,6 @@ variable "security_tags" {
     SecfixContainsUserData = "false"
     SecfixContainsEPHI     = "false"
     SecfixDescription      = "non-productive and non-sensitive workloads"
-    expireOn               = "2024-10-30"
+    expireOn               = "2024-11-21"
   }
 }
