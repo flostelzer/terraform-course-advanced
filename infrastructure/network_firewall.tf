@@ -1,5 +1,5 @@
 resource "azurerm_subnet" "tfschool_firewall" {
-  count = terraform.workspace == "dev" ? 1 : 0  
+  count = terraform.workspace == "dev" ? 1 : 0
 
   name                 = "AzureFirewallSubnet"
   resource_group_name  = azurerm_resource_group.tfschool.name
@@ -8,7 +8,7 @@ resource "azurerm_subnet" "tfschool_firewall" {
 }
 
 resource "azurerm_public_ip" "tfschool" {
-  count = terraform.workspace == "dev" ? 1 : 0  
+  count = terraform.workspace == "dev" ? 1 : 0
 
   name                = "ip-${local.workload_context}"
   location            = azurerm_resource_group.tfschool.location
@@ -20,7 +20,7 @@ resource "azurerm_public_ip" "tfschool" {
 }
 
 resource "azurerm_firewall" "tfschool" {
-  count = terraform.workspace == "dev" ? 1 : 0  
+  count = terraform.workspace == "dev" ? 1 : 0
 
   name                = "fw-${local.workload_context}"
   location            = azurerm_resource_group.tfschool.location
@@ -38,7 +38,7 @@ resource "azurerm_firewall" "tfschool" {
 }
 
 resource "azurerm_firewall_application_rule_collection" "tfschool" {
-  count = terraform.workspace == "dev" ? 1 : 0  
+  count = terraform.workspace == "dev" ? 1 : 0
 
   name                = "fwrc-${local.workload_context}"
   azure_firewall_name = azurerm_firewall.tfschool[0].name

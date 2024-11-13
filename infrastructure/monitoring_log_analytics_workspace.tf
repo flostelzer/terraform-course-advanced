@@ -1,6 +1,6 @@
 # moved {
-#   from = azurerm_log_analytics_workspace.tfschool
-#   to   = azurerm_log_analytics_workspace.terraform_course
+#   from = azurerm_log_analytics_workspace.terraform_course
+#   to   = azurerm_log_analytics_workspace.tfschool
 # }
 
 resource "azurerm_log_analytics_workspace" "tfschool" {

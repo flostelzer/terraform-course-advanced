@@ -28,19 +28,12 @@ provider "azurerm" {
   features {}
 }
 
-locals {
-  workload_context            = "${var.workload_name}-${var.env}-${var.location_short}-${var.workload_instance}"
-  workload_context_short      = "${var.workload_name_short}${var.env}${var.location_short}${var.workload_instance}"
-  workload_context_workspaces = "${var.workload_name}-${terraform.workspace}-${var.location_short}-${var.workload_instance}"
-}
-
-
 # Naming module:
 # https://registry.terraform.io/modules/Azure/naming/azurerm/latest
 module "naming" {
   source  = "Azure/naming/azurerm"
   version = "0.4.0"
-  suffix  = [local.workload_context_short]
+  suffix  = [local.workload_context_workspaces_short]
 }
 
 resource "azurerm_resource_group" "tfschool" {
